@@ -1,0 +1,325 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- ===============================================-->
+    <!--    Document Title-->
+    <!-- ===============================================-->
+    <title>책 속의 작은 카페</title>
+
+
+    <!-- ===============================================-->
+    <!--    Favicons-->
+    <!-- ===============================================-->
+    <link rel="icon" type="image/x-icon" href="../static/img/favicon.png" />
+
+
+    <!-- ===============================================-->
+    <!--    Stylesheets-->
+    <!-- ===============================================-->
+    <link href="{% static 'css/main.css' %}" rel="stylesheet" />
+  </head>
+
+
+  <body>
+
+    <!-- ===============================================-->
+    <!--    Main Content-->
+    <!-- ===============================================-->
+    <main class="main" id="top">
+
+
+      <!-- ============================================-->
+      <!-- <section> begin ============================-->
+      <section class="bg-primary py-2 d-none d-sm-block">
+
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-auto d-none d-lg-block">
+              <p class="my-2 fs--1"><i class="fas fa-map-marker-alt me-3"></i><span>당신의 책을 찾아보세요!</span></p>
+            </div>
+            <div class="col-auto ms-md-auto order-md-2 d-none d-sm-block">
+              <ul class="list-unstyled list-inline my-2">
+                <li class="list-inline-item"><a class="text-decoration-none" href="#!"><i class="fab fa-facebook-f text-900"></i></a></li>
+                <li class="list-inline-item"><a class="text-decoration-none" href="#!"><i class="fab fa-pinterest text-900"></i></a></li>
+                <li class="list-inline-item"><a class="text-decoration-none" href="#!"><i class="fab fa-twitter text-900"></i></a></li>
+                <li class="list-inline-item"><a class="text-decoration-none" href="#!"><i class="fab fa-instagram text-900"> </i></a></li>
+              </ul>
+            </div>
+            <div class="col-auto">
+              <p class="my-2 fs--1"><i class="fas fa-envelope me-3"></i><a class="text-900" href="mailto:vctung@outlook.com">문의하기 </a></p>
+            </div>
+          </div>
+        </div>
+        <!-- end of .container-->
+
+      </section>
+      <!-- <section> close ============================-->
+      <!-- ============================================-->
+
+
+      <nav class="navbar navbar-expand-lg navbar-light sticky-top py-3 d-block" data-navbar-on-scroll="data-navbar-on-scroll">
+        <div class="container"><a class="navbar-brand" href="{% url 'premain:index' %}"><img src="../static/img/logo.png" height="45" alt="logo" /></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"> </span></button>
+          <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base">
+              <li class="nav-item px-2"><a class="nav-link" id = "yourMbti" aria-current="page" onclick="modalOn()" style="cursor:pointer;">MBTI</a></li>
+                <li class="nav-item px-2"><a class="nav-link" aria-current="page" href="{% url 'main:index' %}">HOME</a></li>
+              <li class="nav-item px-2"><a class="nav-link" aria-current="page" href="{% url 'myPage:index' %}">MyPage</a></li>
+            </ul><a class="btn btn-primary order-1 order-lg-0" href="{% url 'login:login'%}">Login</a>
+            <form class="d-flex my-3 d-block d-lg-none">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+              <button class="btn btn-outline-primary" type="submit">Search</button>
+            </form>
+            <div class="dropdown d-none d-lg-block">
+              <button class="btn btn-outline-light ms-2" id="dropdownMenuButton1" type="submit" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-search text-800"></i></button>
+              <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton1" style="top:55px">
+                <form>
+                  <input class="form-control" type="search" placeholder="Search" aria-label="Search" />
+                </form>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+        
+    <!--   문제 모달      -->
+    <div class="modal" id ="mbti" style="z-index:1050; max-height:1080px"> 
+        <div class="modal_body" style="max-height:250px;">
+            <div class="form-group purple-border">
+                <h1 id="modal_bookName" style = "display:inline-block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">MBTI</h1>
+                
+                <form action="#" method="POST">
+                    {% csrf_token %}
+                    <div class = "mySlides">
+                        <!-- <textarea class="form-control" name = "review" id="exampleFormControlTextarea4" style="margin: 0px; width: 321px; height: 350px;"></textarea> -->
+                             <input type="radio" name="prob1" checked>
+                             <label for="huey">자아성찰</label>
+                        
+                             <input type="radio" name="prob1">
+                             <label for="dewey">주변관찰</label>
+                        
+                        <div>
+                            <span id="modal_delete"><a onclick = "nextPage('mbti');"></a></span>
+                        </div>
+                    </div>
+                    <div class = "mySlides">
+                        <!-- <textarea class="form-control" name = "review" id="exampleFormControlTextarea4" style="margin: 0px; width: 321px; height: 350px;"></textarea> -->
+                        
+                        <input type="radio"  name="prob2" checked>
+                             <label for="huey">실용적</label>
+                        
+                             <input type="radio" name="prob2">
+                             <label for="dewey">협동적</label>
+                        
+                        <div>
+                            <span id="modal_delete"><a onclick = "nextPage('mbti');"></a></span>
+                        </div>
+                    </div>
+                    
+                    <div class = "mySlides">
+                        <!-- <textarea class="form-control" name = "review" id="exampleFormControlTextarea4" style="margin: 0px; width: 321px; height: 350px;"></textarea> -->
+                        
+                            <input type="radio"  name="prob3" checked>
+                            <label for="huey">외교형</label>
+
+                            <input type="radio"  name="prob3">
+                            <label for="dewey">분석형</label>
+                        <div>
+                            <span id="modal_delete"><a onclick = "nextPage('mbti');"></a></span>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class = "mySlides">
+                        <!-- <textarea class="form-control" name = "review" id="exampleFormControlTextarea4" style="margin: 0px; width: 321px; height: 350px;"></textarea> -->
+                            <input type="radio"  name="prob4" checked>
+                            <label for="huey">감각형</label>
+
+                            <input type="radio"  name="prob4">
+                            <label for="dewey">직관형</label>
+                        <div>
+                            <span id="modal_delete"><a onclick = "checkAnswer('modal');"></a></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div> 
+    </div>
+        
+{% block content %}
+      <section class="pt-6 bg-600" id="home">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-md-5 col-lg-6 order-0 order-md-1 text-end"><img class="pt-7 pt-md-0 w-100" src="../static/img/ranking.png" width="470" alt="hero-header" /></div>
+            <div class="col-md-7 col-lg-6 text-md-start text-center py-6">
+              <h4 class="fw-bold font-sans-serif">
+                  Become Reader</h4>
+              <h1 class="fs-6 fs-xl-7 mb-5">Find the best book for you!</h1><a class="btn btn-primary me-2" href="{% url 'myPage:index' %}" role="button">Reading book</a><a class="btn btn-outline-secondary" href="#recommendBook" role="button">Find book</a>
+            </div>
+          </div>
+        </div>
+      </section>
+        
+
+
+
+      <!-- ============================================-->
+      <!-- <section> begin ============================-->
+      <section>
+
+        <div class="container">
+          <div class="row"><h1 class="text-center mb-5"> Recommendation for you </h1></div>
+        
+        </div>
+          
+
+<body> 
+  <link rel ="stylesheet" href="{% static 'css/myPage.css' %}"/>
+    <section class="cards-wrapper" id = "recommendBook">
+        {% for title, img, review, writer, price, mbti, link in bookInfo %}
+          <div class="card-grid-space">
+            <!-- <div class="num">01</div> -->
+            <a class="myPage_card" href="{% url 'myPage:detailReview' title %}" style="--bg-img: url({{img}}); background-size:contain; background-repeat: no-repeat;">
+              <div>
+                <h3 style="color:white">{{writer}}</h3>
+                <p class = "review">{{review}}</p>
+                <div class="tags">
+                  <div class="tag bookMbti" >{{mbti}}</div>
+                  <div class="tag">{{price}}</div>
+                  <div class="tag link" OnClick="location.href ='{{link}}'" style="cursor:pointer;">BUYLINK</div>
+                </div>
+              </div>
+            </a>
+          </div>
+        {% endfor %}   
+    </section>
+
+</body>
+    
+    <script>
+        var cardList = document.getElementsByClassName("card-grid-space");
+        
+        var lastY = 0;
+        var lastX = 0;
+        var slideIdx = 0;
+                
+        link = document.getElementsByClassName('link');
+        
+        for(var i =0 ; i < link.length; ++i)
+        {
+            link[i].addEventListener('click', function(e){
+                console.log("event발생")
+                e.stopPropagation();
+                e.preventDefault();
+            })
+        }
+        
+        for(var i = 0; i < cardList.length; ++i)
+        {
+            review = cardList[i].getElementsByClassName("review")[0];
+            // cardList[i].getElementsByClassName("num")[0].innerText = i + 1;
+            
+            review.innerHTML = review.innerText;
+            review.innerText = review.innerText.replace(/\n/g, "").substring(0, 20) + "...";
+        }
+        
+        function modalOn(title, obj){
+            document.getElementsByClassName('modal')[0].className = "modalShow"
+            window.scrollTo(0, 0);
+            
+            slideIdx = 0;
+            nextPage('mbti')
+        }
+        
+        function modalOff(){
+            document.getElementsByClassName('modalShow')[0].className = "modal"
+            // console.log(lastY, lastX)
+            // window.scrollTo(lastY.bottom, lastX.x);
+        }
+        
+                
+        function nextPage(objId){
+            console.log(document.getElementById(objId))
+              var x = document.getElementById(objId).getElementsByClassName("mySlides");
+            
+              for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+              }
+            
+              x[slideIdx].style.display = "block";
+              ++slideIdx;
+        }
+        
+        
+        function checkAnswer(choice){
+            modalOff();
+            candAns ='';
+            
+            name = "prob"
+            for(var i = 0; i < 4; ++i)
+            {
+                candAns = candAns + answerTrue(document.getElementsByName(name + (i + 1)))
+            }
+            
+            console.log(candAns)
+            
+            {%for str, mbti in Mbti %}
+                if("{{str}}" == candAns)
+                {
+                    document.getElementById('yourMbti').innerText = "{{mbti}}"
+                }
+             {% endfor %}
+             
+            var card = document.getElementsByClassName('card-grid-space');
+            var myMbyi = document.getElementById('yourMbti').innerText;
+
+            for(var i = 0; i < card.length; ++i){                                                                        //앞에 두글자로만 가지고 옴
+                if(card[i].getElementsByClassName('bookMbti')[0].innerText.substring(0,2) != myMbyi.substring(0,2)){
+                    card[i].style.display = "none"
+                    console.log("발견")
+                }
+            }
+        }
+        
+        function answerTrue(list){
+            
+            for(var i = 0; i < list.length; ++i){
+                if(list[i].checked){
+                    return i;
+                }
+            }
+        }
+        
+    </script>     
+    </section>
+      <!-- <section> close ============================-->
+      <!-- ============================================-->
+
+
+
+
+
+    <!-- ===============================================-->
+    <!--    JavaScripts-->
+    <!-- ===============================================-->
+    <script src="vendors/@popperjs/popper.min.js"></script>
+    <script src="vendors/bootstrap/bootstrap.min.js"></script>
+    <script src="vendors/is/is.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+    <script src="vendors/fontawesome/all.min.js"></script>
+    <script src="assets/js/theme.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&amp;family=Rubik:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+
+      </main>
+    </body>
+</html>
+{% endblock %}
